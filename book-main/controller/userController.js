@@ -107,6 +107,10 @@ exports.createUser = async(req,res)=>{
             if(existingEmail){
                 return res.send("Error email id is already present");
             }
+        const id=await User.findOne({userid})
+        if(id){
+            return res.send("Please select unique UserId")
+        }
         const userCreated = await User.create({name,password,email,userid});
         console.log('User Registered Successfully',userCreated);
 
